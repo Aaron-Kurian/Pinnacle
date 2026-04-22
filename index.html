@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Real Time Transport Tracking for Small Cities</title>
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">CityTrack</div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#track">Track Bus</a></li>
+        <li><a href="#routes">Routes</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section id="track" class="card">
+      <h1>Real Time Transport Tracking for Small Cities</h1>
+      <p class="subtitle">
+        Enter a route number to simulate live bus movement, stop updates, and ETA.
+      </p>
+
+      <div class="search-row">
+        <input
+          id="routeInput"
+          type="text"
+          placeholder="Enter route number (e.g., 101)"
+          aria-label="Route Number"
+        />
+        <select id="routeSelect" aria-label="Select available route">
+          <option value="">Select route</option>
+        </select>
+        <button id="searchBtn">Search</button>
+      </div>
+      <p id="searchMessage" class="message"></p>
+
+      <div class="available-routes-card">
+        <h3>Available Routes</h3>
+        <ul id="availableRoutesList" class="available-routes-list"></ul>
+      </div>
+    </section>
+
+    <section class="grid-layout">
+      <article class="card">
+        <h2>Vehicle Details</h2>
+        <div class="details-grid">
+          <p><strong>Bus Number:</strong> <span id="busNumber">-</span></p>
+          <p><strong>Route:</strong> <span id="routeName">-</span></p>
+          <p><strong>Current Location:</strong> <span id="currentLocation">-</span></p>
+          <p><strong>Next Stop:</strong> <span id="nextStop">-</span></p>
+          <p><strong>Estimated Arrival (ETA):</strong> <span id="eta">-</span></p>
+          <p>
+            <strong>Status:</strong>
+            <span id="status" class="status-badge status-on-time">On Time</span>
+          </p>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>Route Information</h2>
+        <div class="details-grid">
+          <p><strong>Distance:</strong> <span id="routeDistance">-</span></p>
+          <p><strong>Estimated Journey Time:</strong> <span id="routeTime">-</span></p>
+          <p><strong>First Bus:</strong> <span id="firstBus">-</span></p>
+          <p><strong>Last Bus:</strong> <span id="lastBus">-</span></p>
+          <p><strong>Frequency:</strong> <span id="routeFrequency">-</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>Route Stops</h2>
+        <ul id="stopsList" class="stops-list"></ul>
+      </article>
+    </section>
+
+    <section class="grid-layout">
+      <article class="card">
+        <h2>Live Route Map</h2>
+        <div id="map"></div>
+        <div class="route-legend" aria-label="Map legend">
+          <span class="legend-item">
+            <span class="legend-swatch legend-route"></span>
+            Active Route
+          </span>
+          <span class="legend-item">
+            <span class="legend-swatch legend-stop"></span>
+            Stop Marker
+          </span>
+          <span class="legend-item">
+            <span class="legend-swatch legend-bus"></span>
+            Current Bus
+          </span>
+        </div>
+        <p class="small-text map-note">
+          Map tiles load from OpenStreetMap. Route line and bus marker update in real time.
+        </p>
+        <div id="mapLocationText" class="map-location">Location: -</div>
+      </article>
+
+      <article class="card" id="routes">
+        <h2>Admin Simulation Panel</h2>
+        <p class="small-text">
+          Use these controls to simulate operator updates.
+        </p>
+
+        <div class="admin-controls">
+          <div class="button-group">
+            <button id="onTimeBtn" class="secondary-btn">Set On Time</button>
+            <button id="delayedBtn" class="secondary-btn">Set Delayed</button>
+          </div>
+
+          <div class="manual-location-group">
+            <label for="manualLocation">Manual Location Update:</label>
+            <input id="manualLocation" type="text" placeholder="Enter custom location..." />
+            <button id="updateLocationBtn" class="secondary-btn">Update Location</button>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section id="contact" class="card">
+      <h2>Contact</h2>
+      <p class="small-text">
+        Demo project for academic use. For transport authority support, contact:
+        support@citytrack-demo.local
+      </p>
+      <div id="notification" class="notification hidden"></div>
+    </section>
+  </main>
+
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+  <script src="script.js"></script>
+</body>
+</html>
